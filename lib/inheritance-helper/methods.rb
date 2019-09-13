@@ -12,6 +12,8 @@ module InheritanceHelper
       ::InheritanceHelper::Methods.redefine_class_method(self, method, value)
     end
 
+    # useful for adding data to hashes.
+    # when working with arrays it keeps a flat data set
     def add_value_to_class_method(method, value)
       old_value = send(method)
 
@@ -26,6 +28,7 @@ module InheritanceHelper
       redefine_class_method(method, old_value.frozen? ? new_value.freeze : new_value)
     end
 
+    # useful for working with arrays and maintain a list of values
     def append_value_to_class_method(method, value)
       old_value = send(method)
       new_value = old_value.dup << value
