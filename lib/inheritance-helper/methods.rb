@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module InheritanceHelper
+  # Collection of utility methods for rewriting class methods
   module Methods
     def self.redefine_class_method(klass, method, value)
       class << klass; self; end.send(:define_method, method) { value }
@@ -22,6 +23,12 @@ module InheritanceHelper
           old_value + Array(value)
         end
 
+      redefine_class_method(method, old_value.frozen? ? new_value.freeze : new_value)
+    end
+
+    def append_value_to_class_method(method, value)
+      old_value = send(method)
+      new_value = old_value.dup << value
       redefine_class_method(method, old_value.frozen? ? new_value.freeze : new_value)
     end
   end

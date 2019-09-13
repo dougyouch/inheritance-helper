@@ -2,7 +2,8 @@
 
 Gem::Specification.new do |s|
   s.name        = 'inheritance-helper'
-  s.version     = '0.1.0'
+  s.version     = '0.1.5'
+  s.licenses    = ['MIT']
   s.summary     = 'Inheritance Helpers'
   s.description = 'Redefines class methods'
   s.authors     = ['Doug Youch']
