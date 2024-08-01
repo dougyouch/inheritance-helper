@@ -9,7 +9,8 @@ GEM
       ast (~> 2.4.1)
     rainbow (3.1.1)
     regexp_parser (2.2.1)
-    rexml (3.2.5)
+    rexml (3.3.3)
+      strscan
     rspec (3.11.0)
       rspec-core (~> 3.11.0)
       rspec-expectations (~> 3.11.0)
@@ -41,10 +42,12 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.4)
+    strscan (3.1.0)
     unicode-display_width (2.1.0)
 
 PLATFORMS
   x86_64-darwin-21
+  x86_64-linux
 
 DEPENDENCIES
   rspec
