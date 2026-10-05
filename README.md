@@ -208,7 +208,7 @@ InheritanceHelper::ClassBuilder::Utils.get_class_name(:line_item, 'Has', 'Class'
 already exists it is replaced, with Ruby's "already initialized constant" warning.
 
 `get_class_name` splits the name on underscores and capitalizes the first letter of each part, so
-`line_items` becomes `LineItems`. The result is the same whether or not ActiveSupport is loaded (before 1.0 it
+`line_items` becomes `LineItems`. The result is the same whether or not ActiveSupport is loaded (before 0.3.0 it
 used `String#classify`, which singularized the name).
 
 ## Development
