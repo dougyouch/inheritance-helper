@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0](https://github.com/dougyouch/inheritance-helper/compare/v0.3.0...v1.0.0) (2026-10-05)
+
+
+### Miscellaneous Chores
+
+* **release:** release 1.0.0 ([f0dd59a](https://github.com/dougyouch/inheritance-helper/commit/f0dd59a621904062999a3bbf9bfd190bf55ffbb4))
+
 ## [0.3.0](https://github.com/dougyouch/inheritance-helper/compare/v0.2.6...v0.3.0) (2026-10-05)
 
 
