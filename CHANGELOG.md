@@ -5,11 +5,13 @@
 
 ### ⚠ BREAKING CHANGES
 
-* get_class_name no longer calls String#classify when ActiveSupport is loaded, so names are no longer singularized there (:line_items now gives LineItems, not LineItem). Class names are now the same whether or not ActiveSupport is loaded.
+* **class-builder:** get_class_name no longer calls String#classify when ActiveSupport is loaded, so names are no longer singularized there (:line_items now gives LineItems, not LineItem). Class names are now the same whether or not ActiveSupport is loaded.
+* **gem:** requires Ruby 3.3. Ruby 3.2 reached end of life in March 2026 and is no longer supported.
 
-### 1.0
+### Features
 
-* clearer nil error, consistent class names, Ruby 3.3 ([#5](https://github.com/dougyouch/inheritance-helper/issues/5)) ([11bb5a8](https://github.com/dougyouch/inheritance-helper/commit/11bb5a8d056d7b6c2794895bd01c9d9bce14805d))
+* **class-builder:** build class names the same way with or without activesupport ([#5](https://github.com/dougyouch/inheritance-helper/issues/5)) ([11bb5a8](https://github.com/dougyouch/inheritance-helper/commit/11bb5a8d056d7b6c2794895bd01c9d9bce14805d))
+* **methods:** raise a TypeError naming the class method when it returns nil ([#5](https://github.com/dougyouch/inheritance-helper/issues/5)) ([11bb5a8](https://github.com/dougyouch/inheritance-helper/commit/11bb5a8d056d7b6c2794895bd01c9d9bce14805d))
 
 ## [0.2.6](https://github.com/dougyouch/inheritance-helper/compare/v0.2.5...v0.2.6) (2026-10-05)
 
