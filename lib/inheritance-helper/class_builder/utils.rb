@@ -12,8 +12,8 @@ module InheritanceHelper
 
       # Builds a class name from `name` with an optional prefix and suffix.
       #
-      # `name` is converted with `String#classify` when ActiveSupport is loaded (which also singularizes it).
-      # Otherwise it is split on underscores and each part is capitalized.
+      # `name` is split on underscores and the first letter of each part is capitalized. The result doesn't depend
+      # on whether ActiveSupport is loaded, and the name isn't singularized (`:line_items` gives `"LineItems"`).
       #
       # @param name [String, Symbol] the base name, such as `:line_item`
       # @param prefix_class_name [String, nil] text to put before the converted name
@@ -22,15 +22,7 @@ module InheritanceHelper
       # @example
       #   get_class_name(:line_item, 'Schema', 'Class') # => "SchemaLineItemClass"
       def get_class_name(name, prefix_class_name, suffix_class_name)
-        name = name.to_s
-
-        class_name =
-          if name.respond_to?(:classify)
-            name.classify
-          else
-            name.split('_').map { |part| part.sub(/\A./, &:upcase) }.join
-          end
-
+        class_name = name.to_s.split('_').map { |part| part.sub(/\A./, &:upcase) }.join
         "#{prefix_class_name}#{class_name}#{suffix_class_name}"
       end
 

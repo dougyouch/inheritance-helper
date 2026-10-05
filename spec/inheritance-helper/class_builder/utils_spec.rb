@@ -46,8 +46,8 @@ describe InheritanceHelper::ClassBuilder::Utils do
         str
       end
 
-      it 'uses classify' do
-        expect(subject).to eq('PreFooBarGame')
+      it 'does not use classify or singularize' do
+        expect(subject).to eq('PreFooBarsGame')
       end
     end
   end
