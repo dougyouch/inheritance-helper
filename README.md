@@ -20,7 +20,7 @@ attribute definitions.
 
 ## Installation
 
-Requires Ruby 3.2 or newer. Add this line to your application's Gemfile:
+Requires Ruby 3.3 or newer. Add this line to your application's Gemfile:
 
 ```ruby
 gem 'inheritance-helper'
