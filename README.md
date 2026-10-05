@@ -20,7 +20,7 @@ attribute definitions.
 
 ## Installation
 
-Requires Ruby 3.2 or newer. Add this line to your application's Gemfile:
+Requires Ruby 3.3 or newer. Add this line to your application's Gemfile:
 
 ```ruby
 gem 'inheritance-helper'
@@ -149,10 +149,38 @@ method keeps the visibility of the one it replaces, so a private class method st
 `InheritanceHelper::Methods.redefine_class_method(klass, method, value)` does the same for a class that
 doesn't extend the module.
 
+### Copy nested values before changing them
+
+Once a value is set with these helpers, every call returns the same object, and a subclass starts with its
+parent's object. Freezing covers only the top-level value: a hash or array *inside* it is shared by the parent
+and the subclass, so changing it in place changes both:
+
+```ruby
+class Base
+  extend InheritanceHelper::Methods
+
+  def self.config = {}.freeze
+
+  add_value_to_class_method :config, skip: []
+end
+
+class Child < Base
+  # wrong: appends to Base.config[:skip] too
+  config[:skip] << :logs
+
+  # right: build a new nested value and replace the key
+  add_value_to_class_method :config, skip: config[:skip] + [:logs]
+end
+```
+
+The same applies to a value from `redefine_class_method`: `dup` the value (and any nested values you change)
+before changing it, then pass the copy to `redefine_class_method`.
+
 ### Notes
 
 - The class method must already return a value: `add_value_to_class_method` and
-  `append_value_to_class_method` call it to get the current value.
+  `append_value_to_class_method` call it to get the current value, and raise a `TypeError` naming the method
+  when it returns `nil`.
 - Each call defines a method on the class's singleton class. Classes declared at load time (the usual DSL
   case) are fine; redefining class methods from several threads at once is not synchronized.
 
@@ -179,9 +207,9 @@ InheritanceHelper::ClassBuilder::Utils.get_class_name(:line_item, 'Has', 'Class'
 `nil`), assigns it to the constant in `base_module`, and evaluates the block in the new class. If the constant
 already exists it is replaced, with Ruby's "already initialized constant" warning.
 
-`get_class_name` uses `String#classify` when ActiveSupport is loaded, which also singularizes the name
-(`line_items` becomes `LineItem`). Without ActiveSupport the name is split on underscores and each part is
-capitalized (`line_items` becomes `LineItems`).
+`get_class_name` splits the name on underscores and capitalizes the first letter of each part, so
+`line_items` becomes `LineItems`. The result is the same whether or not ActiveSupport is loaded (before 1.0 it
+used `String#classify`, which singularized the name).
 
 ## Development
 

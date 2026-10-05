@@ -27,12 +27,12 @@ bundle exec yard doc --fail-on-warning --no-save --no-output
 A small dependency-free gem (`inheritance-helper`) for class-level values that subclasses extend without changing their parents. Used by `schema-model` (`../schema`), so check that its specs still pass after behavior changes.
 
 - **InheritanceHelper::Methods** (`lib/inheritance-helper/methods.rb`) - extended onto a class. `redefine_class_method` defines a method on the receiver's singleton class that returns a fixed value (keeping the replaced method's visibility). `add_value_to_class_method` merges a Hash or adds `Array(value)` to an Array/Set; `append_value_to_class_method` appends one element with `<<`. Both build a new value from the current one, never mutate it, and freeze the result when the current value is frozen.
-- **InheritanceHelper::ClassBuilder::Utils** (`lib/inheritance-helper/class_builder/utils.rb`) - `module_function` helpers: `get_class_name` (uses `String#classify` when ActiveSupport is loaded) and `create_class`, which assigns a new class to a constant in a module.
+- **InheritanceHelper::ClassBuilder::Utils** (`lib/inheritance-helper/class_builder/utils.rb`) - `module_function` helpers: `get_class_name` (splits on underscores and capitalizes each part; never uses ActiveSupport) and `create_class`, which assigns a new class to a constant in a module.
 - `lib/inheritance-helper/version.rb` holds `InheritanceHelper::VERSION`, read by the gemspec.
 
 ## CI
 
-`.github/workflows/ci.yml` runs RuboCop, the YARD docs check, and the specs on Ruby 3.2 (the gemspec minimum; gems resolved without `Gemfile.lock`, `COVERAGE=false`) and on the `.ruby-version` Ruby (with `Gemfile.lock` and the 100% line/branch coverage gate). On pushes to `master`, it publishes `coverage.svg` (line) and `branches.svg` (branch) from `script/coverage_badge.rb` to the orphan `badges` branch for the README badges.
+`.github/workflows/ci.yml` runs RuboCop, the YARD docs check, and the specs with `Gemfile.lock` and the 100% line/branch coverage gate on Ruby 3.3 (the gemspec minimum) and on the `.ruby-version` Ruby. On pushes to `master`, it publishes `coverage.svg` (line) and `branches.svg` (branch) from `script/coverage_badge.rb` to the orphan `badges` branch for the README badges.
 
 ## Releases
 
