@@ -1,11 +1,30 @@
-Naming/FileName:
-  Enabled: false
-Metrics/LineLength:
-  Max: 120
-Metrics/ModuleLength:
-  Max: 120
-Metrics/MethodLength:
-  Max: 20
 AllCops:
+  TargetRubyVersion: 3.2
+  NewCops: enable
+  SuggestExtensions: false
   Exclude:
-    - 'spec/**/*_spec.rb'
+    - 'vendor/**/*'
+    - 'coverage/**/*'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+    - '*.gemspec'
+
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: always
+
+Layout/LineLength:
+  Max: 120
+  Exclude:
+    - 'spec/**/*'
+
+# the gem name is hyphenated
+Naming/FileName:
+  Exclude:
+    - 'lib/inheritance-helper.rb'
+
+# create_class takes its arguments positionally
+Metrics/ParameterLists:
+  Max: 5
+  CountKeywordArgs: false

@@ -1,0 +1,13 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "bootstrap-sha": "be6c776645ea863a9503c8802d6a8cf23198fa9c",
+  "bump-minor-pre-major": true,
+  "packages": {
+    ".": {
+      "release-type": "ruby",
+      "package-name": "inheritance-helper",
+      "version-file": "lib/inheritance-helper/version.rb",
+      "include-component-in-tag": false
+    }
+  }
+}
