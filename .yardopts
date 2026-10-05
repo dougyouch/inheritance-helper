@@ -4,5 +4,6 @@
 lib/**/*.rb
 -
 README.md
+UPGRADING.md
 CHANGELOG.md
 LICENSE.txt

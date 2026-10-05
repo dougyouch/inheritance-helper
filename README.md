@@ -7,7 +7,7 @@ Class-level settings that subclasses can extend without changing their parents.
 [![Branch Coverage](https://raw.githubusercontent.com/dougyouch/inheritance-helper/badges/branches.svg)](https://github.com/dougyouch/inheritance-helper/actions/workflows/ci.yml)
 [![Gem Version](https://badge.fury.io/rb/inheritance-helper.svg)](https://rubygems.org/gems/inheritance-helper)
 
-[API reference](https://rubydoc.info/gems/inheritance-helper) · [Changelog](CHANGELOG.md)
+[API reference](https://rubydoc.info/gems/inheritance-helper) · [Changelog](CHANGELOG.md) · [Upgrading to 1.0](UPGRADING.md)
 
 DSLs often collect data at the class level: attributes, options, callbacks. With a class instance variable,
 subclasses don't see the parent's data. With a class variable (`@@attributes`), every class in the chain
@@ -209,7 +209,7 @@ already exists it is replaced, with Ruby's "already initialized constant" warnin
 
 `get_class_name` splits the name on underscores and capitalizes the first letter of each part, so
 `line_items` becomes `LineItems`. The result is the same whether or not ActiveSupport is loaded (before 0.3.0 it
-used `String#classify`, which singularized the name).
+used `String#classify`, which singularized the name; see [UPGRADING.md](UPGRADING.md#class-names-no-longer-use-activesupport)).
 
 ## Development
 

@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.authors     = ['Doug Youch']
   s.email       = 'dougyouch@gmail.com'
   s.homepage    = 'https://github.com/dougyouch/inheritance-helper'
-  s.files       = Dir['lib/**/*.rb', 'README.md', 'LICENSE.txt', 'CHANGELOG.md']
+  s.files       = Dir['lib/**/*.rb', 'README.md', 'UPGRADING.md', 'LICENSE.txt', 'CHANGELOG.md']
   s.required_ruby_version = '>= 3.3'
 
   s.metadata['rubygems_mfa_required'] = 'true'
