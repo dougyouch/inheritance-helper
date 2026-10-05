@@ -13,6 +13,7 @@ describe InheritanceHelper::Methods do
       def self.test_list = [].freeze
       def self.unfrozen_hash = { a: 1 }
       def self.unfrozen_array = [:a]
+      def self.missing_default = nil
     end
   end
 
@@ -113,6 +114,22 @@ describe InheritanceHelper::Methods do
       class_b.add_value_to_class_method(:private_list, :b)
       expect(class_b.send(:private_list)).to eq([:b])
       expect(class_b.respond_to?(:private_list)).to be(false)
+    end
+  end
+
+  describe 'a class method that returns nil' do
+    it 'raises a TypeError naming the method from add_value_to_class_method' do
+      expect { class_b.add_value_to_class_method(:missing_default, :b) }
+        .to raise_error(TypeError, /\.missing_default returned nil/)
+    end
+
+    it 'raises a TypeError naming the method from append_value_to_class_method' do
+      expect { class_b.append_value_to_class_method(:missing_default, :b) }
+        .to raise_error(TypeError, /\.missing_default returned nil/)
+    end
+
+    it 'keeps the helper private' do
+      expect(class_b.respond_to?(:current_class_method_value)).to be(false)
     end
   end
 

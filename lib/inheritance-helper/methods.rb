@@ -80,11 +80,12 @@ module InheritanceHelper
     # @param method [Symbol, String] name of a class method that returns a Hash, Array or Set
     # @param value [Object] the value or values to add
     # @return [Module] this class
+    # @raise [TypeError] if the class method returns `nil`
     # @example
     #   add_value_to_class_method(:attributes, name: :string)  # {} => {name: :string}
     #   add_value_to_class_method(:fields, [:a, :b])           # [] => [:a, :b]
     def add_value_to_class_method(method, value)
-      old_value = send(method)
+      old_value = current_class_method_value(method)
 
       new_value =
         case old_value
@@ -106,12 +107,27 @@ module InheritanceHelper
     #   to `dup` and `<<`)
     # @param value [Object] the element to append
     # @return [Module] this class
+    # @raise [TypeError] if the class method returns `nil`
     # @example
     #   append_value_to_class_method(:callbacks, [:save, :log])  # [] => [[:save, :log]]
     def append_value_to_class_method(method, value)
-      old_value = send(method)
+      old_value = current_class_method_value(method)
       new_value = old_value.dup << value
       redefine_class_method(method, old_value.frozen? ? new_value.freeze : new_value)
+    end
+
+    private
+
+    # @api private
+    # @param method [Symbol, String] name of the class method
+    # @return [Object] the method's current value
+    # @raise [TypeError] if the method returns `nil`
+    def current_class_method_value(method)
+      value = send(method)
+      return value unless value.nil?
+
+      raise TypeError, "#{self}.#{method} returned nil; define it to return a starting value such as {}.freeze " \
+                       'or [].freeze'
     end
   end
 end
