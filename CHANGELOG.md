@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.3.0](https://github.com/dougyouch/inheritance-helper/compare/v0.2.6...v0.3.0) (2026-10-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* get_class_name no longer calls String#classify when ActiveSupport is loaded, so names are no longer singularized there (:line_items now gives LineItems, not LineItem). Class names are now the same whether or not ActiveSupport is loaded.
+
+### 1.0
+
+* clearer nil error, consistent class names, Ruby 3.3 ([#5](https://github.com/dougyouch/inheritance-helper/issues/5)) ([11bb5a8](https://github.com/dougyouch/inheritance-helper/commit/11bb5a8d056d7b6c2794895bd01c9d9bce14805d))
+
 ## [0.2.6](https://github.com/dougyouch/inheritance-helper/compare/v0.2.5...v0.2.6) (2026-10-05)
 
 
