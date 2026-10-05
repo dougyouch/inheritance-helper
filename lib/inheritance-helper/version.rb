@@ -2,5 +2,5 @@
 
 module InheritanceHelper
   # Gem version, bumped by release-please
-  VERSION = '0.2.5'
+  VERSION = '0.2.6'
 end
